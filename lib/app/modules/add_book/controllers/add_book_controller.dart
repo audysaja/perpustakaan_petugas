@@ -2,6 +2,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:petugas_perpustakaan_app/app/modules/book/controllers/book_controller.dart';
 
 import '../../../data/constant/endpoint.dart';
 import '../../../data/provider/api_provider.dart';
@@ -14,6 +15,7 @@ class AddBookController extends GetxController {
   final TextEditingController penulisController = TextEditingController();
   final TextEditingController penerbitController = TextEditingController();
   final TextEditingController tahunController = TextEditingController();
+  final BookController _bookController= Get.find();
 
   final count = 0.obs;
   @override
@@ -49,6 +51,7 @@ class AddBookController extends GetxController {
             }
         );
         if (response.statusCode == 200){
+          _bookController.getData();
           Get.back();
         } else {
           Get.snackbar("Buku", "Berhasil Ditambah", backgroundColor: Colors.green);
